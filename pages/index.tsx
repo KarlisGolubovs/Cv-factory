@@ -3,6 +3,8 @@ import "tailwindcss/tailwind.css";
 import PersonalDetails from "../app/components/PersonalDetails";
 import WorkExperience from "../app/components/WorkExperience";
 import Education from "../app/components/Education";
+import { pdf } from '@react-pdf/renderer';
+import PdfDocument from '../app/components/BasePdf';
 import {
     IoMdMail,
     IoMdCall,
@@ -67,32 +69,25 @@ const FormPage = () => {
         setAdditionalInfo("");
     };
 
-    const handleDownloadResume = async () => {
-        console.log('cvContent:', cvContent);
-
-        try {
-            const response = await fetch('/api/download-pdf', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ pdfContent: cvContent }),
-            });
-
-            if (response.ok) {
-                const blob = await response.blob();
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'downloaded_resume.pdf';
-                a.click();
-            } else {
-                console.error('Error generating PDF');
-            }
-        } catch (error) {
-            console.error('Error downloading PDF:', error);
-        }
+    const handleDownloadPDF = async () => {
+        const pdfBlob = await pdf(<PdfDocument
+            name={name}
+            objective={objective}
+            email={email}
+            phone={phone}
+            location={location}
+            website={website}
+            jobExperiences={jobExperiences}
+            educations={educations}
+        />).toBlob();
+        const url = URL.createObjectURL(pdfBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'downloaded_resume.pdf';
+        a.click();
     };
+      
+
     return (
 
         <div className="flex flex-col md:flex-row md:space-x-4 p-8 items-start">
@@ -193,7 +188,7 @@ const FormPage = () => {
                 <button
                     type="button"
                     className="absolute top-0 right-0 text-black text-sm focus:outline-none"
-                    onClick={handleDownloadResume}
+                    onClick={handleDownloadPDF}
                 >
                     Download Resume
                 </button>
