@@ -6,7 +6,7 @@ import {
     IoMdGlobe,
     IoMdBriefcase,
     IoMdSchool,
-} from "react-icons/io";
+} from "react-icons/IO";
 
 interface WorkProps {
     company: string;

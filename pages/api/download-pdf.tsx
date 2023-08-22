@@ -1,8 +1,13 @@
-import puppeteer from 'puppeteer';
 import { NextApiRequest, NextApiResponse } from 'next';
+const chromium = require('chrome-aws-lambda');
 
 const generatePDF = async (htmlContent: string): Promise<Buffer> => {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox'] });
+    const browser = await chromium.puppeteer.launch({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: chromium.headless,
+    });
     const page = await browser.newPage();
 
     const styleContent = `
