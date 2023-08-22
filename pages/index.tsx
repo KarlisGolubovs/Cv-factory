@@ -12,7 +12,7 @@ import {
     IoMdGlobe,
     IoMdBriefcase,
     IoMdSchool,
-} from "react-icons/IO";
+} from "react-icons/io";
 
 const FormPage = () => {
     const [name, setName] = useState("");

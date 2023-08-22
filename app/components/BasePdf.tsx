@@ -1,6 +1,6 @@
 import React from 'react';
 import { Document, Page, Text, View, Font } from '@react-pdf/renderer';
-import { IoMdMail, IoMdCall, IoMdMap, IoMdGlobe, IoMdBriefcase, IoMdSchool } from 'react-icons/IO';
+import { IoMdMail, IoMdCall, IoMdMap, IoMdGlobe, IoMdBriefcase, IoMdSchool } from 'react-icons/io';
 
 // Register the Roboto font
 Font.register({
