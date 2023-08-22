@@ -152,9 +152,9 @@ const FormPage = () => {
                                     <ul className="list-disc list-inside">
                                         {experience.description
                                             .split('\n')
-                                            .map((item, i) => item.trim())
-                                            .filter((item) => item !== '')
-                                            .map((item, i) => (
+                                            .map((item: string, i: any) => item.trim())
+                                            .filter((item: string) => item !== '')
+                                            .map((item: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined, i: React.Key | null | undefined) => (
                                                 <li key={i}>{item}</li>
                                             ))}
                                     </ul>
